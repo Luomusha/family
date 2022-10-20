@@ -1,7 +1,7 @@
-import {Sequelize} from 'sequelize';
+import { Sequelize } from 'sequelize';
 import "mysql2"
-import {MYSQL_DATABASE, MYSQL_HOST, MYSQL_PASSWORD, MYSQL_PORT, MYSQL_USERNAME} from './config';
-import {logger} from "./logger";
+import { MYSQL_DATABASE, MYSQL_HOST, MYSQL_PASSWORD, MYSQL_PORT, MYSQL_USERNAME } from './config';
+import { logger } from "./logger";
 
 /** mysql **/
 const mysql = new Sequelize({
@@ -19,8 +19,8 @@ const mysql = new Sequelize({
 
 logger.info("db authenticate...")
 mysql.authenticate()
-    .then(() => sequelize.sync({force: false}))
+    .then(() => sequelize.sync({ force: false }))
     .then(() => logger.info('db sync...'))
     .catch(e => logger.error(`db error: ${e.message}`));
 const sequelize = mysql
-export {sequelize}
+export { sequelize }
