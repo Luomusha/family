@@ -8,11 +8,12 @@ const getPersons = async (req: NextApiRequest, res: NextApiResponse) => {
 }
 
 const postPersons = async (req: NextApiRequest, res: NextApiResponse) => {
-    const { name, gender, birthday } = req.body
+    const { name, gender, birthday, avatar } = req.body
     assert(name, 400)
     assert(gender, 400)
     assert(birthday, 400)
-    const db = await Person.create({ name, gender, birthday })
+    assert(avatar, 400)
+    const db = await Person.create({ name, gender, birthday, avatar })
     res.json(db)
 }
 

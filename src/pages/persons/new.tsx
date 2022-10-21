@@ -1,6 +1,7 @@
 import type { NextPage } from "next"
 import { SystemLayout } from "../../components/SystemLayout";
-import { Button, Card, DatePicker, Form, Input, PageHeader, Radio } from "antd";
+import { InboxOutlined } from '@ant-design/icons';
+import { Button, Card, DatePicker, Form, Input, PageHeader, Radio, Upload } from "antd";
 import { useEffect, useState } from "react";
 import { useFetch } from "../../common/useFetch";
 import { Person } from "../../types";
@@ -26,6 +27,17 @@ const PersonForm: NextPage = () => {
                     rules={[{ required: true, message: "Please input your username!" }]}
                 >
                     <Input />
+                </Form.Item>
+                <Form.Item label="头像"
+                    name="avatar"
+                    rules={[{ required: true, message: "Please input your username!" }]}>
+                    <Upload.Dragger name="files" action="/upload.do">
+                        <p className="ant-upload-drag-icon">
+                            <InboxOutlined />
+                        </p>
+                        <p className="ant-upload-text">Click or drag file to this area to upload</p>
+                        <p className="ant-upload-hint">Support for a single or bulk upload.</p>
+                    </Upload.Dragger>
                 </Form.Item>
                 <Form.Item label="性别"
                     name="gender"

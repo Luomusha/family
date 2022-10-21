@@ -6,6 +6,7 @@ class Person extends Model<Type, Omit<Type, "id">> implements Type {
     declare id: number;
     declare name: string;
     declare gender: string;
+    declare avatar: string;
     declare birthday: Date;
     // timestamps!
     declare readonly createdAt: Date;
@@ -22,6 +23,11 @@ Person.init({
         type: DataTypes.STRING,
         allowNull: false,
         comment: "姓名",
+    },
+    avatar: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        comment: "头像",
     },
     gender: {
         type: DataTypes.STRING,

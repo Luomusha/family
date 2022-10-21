@@ -15,6 +15,10 @@ const PersonPage: NextPage = () => {
         dataIndex: "id",
         key: "id",
     }, {
+        title: "头像",
+        dataIndex: "avatar",
+        key: "avatar",
+    }, {
         title: "姓名",
         dataIndex: "name",
         key: "name",
