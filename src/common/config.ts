@@ -4,6 +4,9 @@ export const MYSQL_DATABASE = process.env.MYSQL_DATABASE || "family";
 export const MYSQL_PORT = Number(process.env.MYSQL_PORT) || 3306;
 export const MYSQL_HOST = process.env.MYSQL_HOST || "127.0.0.1";
 
+export const MINIO_KEY = process.env.MIN_KEY || "";
+export const MINIO_SECRET = process.env.MIN_SECRET || "";
+
 export const SESSION = "SESSION"
 export const ROLE_PERMISSION = {
     "manager": {

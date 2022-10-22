@@ -9,11 +9,11 @@ export const SystemMenu = () => {
         icon: <PieChartOutlined />,
     }, {
         key: "Users",
-        label: <Link href={"./users"}> 用户列表 </Link>,
+        label: <Link href={"./trees"}> 家谱列表 </Link>,
         icon: <UserOutlined />,
     }, {
-        key: "Authorizations",
-        label: <Link href={"./authorizations"}> 账号列表 </Link>,
+        key: "Members",
+        label: <Link href={"./members"}> 成员列表 </Link>,
         icon: <MailOutlined />,
     }, {
         key: "Artworks",

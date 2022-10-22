@@ -1,19 +1,18 @@
 import { DataTypes, Model } from 'sequelize';
 import { sequelize } from '../common/db';
-import { Person as Type } from "../types";
+import { Tree as Type } from "../types";
 
-class Person extends Model<Type, Omit<Type, "id">> implements Type {
+class Tree extends Model<Type, Omit<Type, "id">> implements Type {
     declare id: number;
     declare name: string;
-    declare gender: string;
-    declare avatar: string;
-    declare birthday: Date;
+    declare cover: string;
+    declare note: string;
     // timestamps!
     declare readonly createdAt: Date;
     declare readonly updatedAt: Date;
 }
 
-Person.init({
+Tree.init({
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
@@ -22,23 +21,17 @@ Person.init({
     name: {
         type: DataTypes.STRING,
         allowNull: false,
-        comment: "姓名",
+        comment: "名称",
     },
-    avatar: {
+    cover: {
         type: DataTypes.STRING,
         allowNull: false,
-        comment: "头像",
+        comment: "封面",
     },
-    gender: {
+    note: {
         type: DataTypes.STRING,
         allowNull: false,
-        defaultValue: "male",
-        comment: "性别",
-    },
-    birthday: {
-        type: DataTypes.DATE,
-        allowNull: false,
-        comment: "出生日期"
+        comment: "备注",
     }
 }, {
     sequelize: sequelize,
@@ -46,4 +39,4 @@ Person.init({
     comment: '系列表',
 });
 
-export { Person };
+export { Tree };

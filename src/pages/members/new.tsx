@@ -4,14 +4,13 @@ import { InboxOutlined } from '@ant-design/icons';
 import { Button, Card, DatePicker, Form, Input, PageHeader, Radio, Upload } from "antd";
 import { useEffect, useState } from "react";
 import { useFetch } from "../../common/useFetch";
-import { Person } from "../../types";
+import { Member } from "../../types";
 import router from "next/router";
 import styles from "./styles.module.scss"
 
-const PersonForm: NextPage = () => {
-    const [data, setData] = useState<Person[]>([])
-    const { fetchPost } = useFetch("/api/Persons")
-    const onFinish = (data: Person) => {
+const MemberForm: NextPage = () => {
+    const { fetchPost } = useFetch("/api/Members")
+    const onFinish = (data: Member) => {
         fetchPost(data).then(console.log)
     }
 
@@ -62,5 +61,5 @@ const PersonForm: NextPage = () => {
     </SystemLayout>
 }
 
-export default PersonForm
+export default MemberForm
 

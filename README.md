@@ -39,3 +39,9 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 ```
 docker run --name family-mysql -e MYSQL_ROOT_PASSWORD=family -e MYSQL_DATABASE=family -p 3306:3306 -d mysql
 ```
+
+
+## Minio on Docker
+```
+docker run -p 9000:9000 -p 9001:9001 -v /Users/lossa/Documents/docker/minio:/data --name minio   -d  minio/minio server /data --console-address ":9001"
+```

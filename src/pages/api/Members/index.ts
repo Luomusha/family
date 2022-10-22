@@ -1,29 +1,30 @@
 import assert from "http-assert";
 import { NextApiRequest, NextApiResponse } from "next";
-import { Person } from "../../../schemas/Person";
+import { Member } from "../../../schemas/Member";
 
-const getPersons = async (req: NextApiRequest, res: NextApiResponse) => {
-    const persons = await Person.findAll()
-    res.json(persons)
+const getMembers = async (req: NextApiRequest, res: NextApiResponse) => {
+    const members = await Member.findAll()
+    res.json(members)
 }
 
-const postPersons = async (req: NextApiRequest, res: NextApiResponse) => {
-    const { name, gender, birthday, avatar } = req.body
+const postMembers = async (req: NextApiRequest, res: NextApiResponse) => {
+    const { tid, name, gender, birthday, avatar } = req.body
+    assert(tid, 400)
     assert(name, 400)
     assert(gender, 400)
     assert(birthday, 400)
     assert(avatar, 400)
-    const db = await Person.create({ name, gender, birthday, avatar })
+    const db = await Member.create({ tid, name, gender, birthday, avatar })
     res.json(db)
 }
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
     switch (req.method) {
         case "GET":
-            await getPersons(req, res)
+            await getMembers(req, res)
             break;
         case "POST":
-            await postPersons(req, res)
+            await postMembers(req, res)
             break;
         default:
             res.setHeader("Allow", ["GET", "POST"])

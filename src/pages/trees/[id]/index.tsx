@@ -1,15 +1,16 @@
 import type { NextPage } from "next"
-import { SystemLayout } from "../../components/SystemLayout";
+import { SystemLayout } from "../../../components/SystemLayout";
 import { Button, Card, PageHeader, Table } from "antd";
 import { useEffect, useState } from "react";
-import { useFetch } from "../../common/useFetch";
-import { Person } from "../../types";
+import { useFetch } from "../../../common/useFetch";
+import { Member } from "../../../types";
 import Link from "next/link";
-import styles from "./styles.module.scss"
+import styles from "../styles.module.scss"
+import router from "next/router";
 
-const PersonPage: NextPage = () => {
-    const [data, setData] = useState<Person[]>([])
-    const { loading, fetchGet } = useFetch("/api/Persons")
+const MemberPage: NextPage = () => {
+    const [data, setData] = useState<Member[]>([])
+    const { loading, fetchGet } = useFetch("/api/Members")
     const columns = [{
         title: "ID",
         dataIndex: "id",
@@ -41,15 +42,14 @@ const PersonPage: NextPage = () => {
     }]
 
     useEffect(() => {
-        fetchGet<Person[]>().then(setData)
+        fetchGet<Member[]>().then(setData)
     }, [])
 
     return <SystemLayout>
-        <PageHeader title="项目列表"
+        <PageHeader title="家谱详情"
             subTitle="This is a subtitle"
-            extra={[
-                <Button key="1" type="primary"><Link href={"/persons/new"}>新增成员</Link></Button>,
-            ]} />
+            onBack={() => router.back()}
+            extra={[]} />
         <Table dataSource={data}
             className={styles.Content}
             columns={columns}
@@ -58,5 +58,5 @@ const PersonPage: NextPage = () => {
     </SystemLayout>
 }
 
-export default PersonPage
+export default MemberPage
 
