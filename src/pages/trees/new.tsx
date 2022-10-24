@@ -1,4 +1,4 @@
-import { Button, Card, DatePicker, Form, Input, PageHeader, Radio, Upload, UploadFile, UploadProps } from "antd";
+import { Button, Card, DatePicker, Form, Input, message, PageHeader, Radio, Upload, UploadFile, UploadProps } from "antd";
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import { NextPage } from "next";
 import router from "next/router";
@@ -11,31 +11,14 @@ import { UploadChangeParam, RcFile } from "antd/lib/upload";
 
 const TreeForm: NextPage = () => {
     const { fetchPost } = useFetch("/api/Trees")
-    const [loading, setLoading] = useState(false);
-    const [imageUrl, setImageUrl] = useState<string>();
 
-    const getBase64 = (img: RcFile, callback: (url: string) => void) => {
-        const reader = new FileReader();
-        reader.addEventListener('load', () => callback(reader.result as string));
-        reader.readAsDataURL(img);
-    };
-
-    const handleChange: UploadProps['onChange'] = (info: UploadChangeParam<UploadFile>) => {
-        if (info.file.status === 'uploading') {
-            setLoading(true);
-            return;
-        }
-        if (info.file.status === 'done') {
-            // Get this url from response in real world.
-            getBase64(info.file.originFileObj as RcFile, url => {
-                setLoading(false);
-                setImageUrl(url);
-            });
-        }
-    };
-
-    const onFinish = (data: Tree) => {
-        fetchPost(data).then(console.log)
+    const onFinish = (tree: Tree) => {
+        fetchPost(tree)
+            .then(() => {
+                message.success("保存成功")
+                router.back()
+            })
+            .catch(e => message.error(e.message))
     }
 
     return <SystemLayout>
@@ -51,23 +34,36 @@ const TreeForm: NextPage = () => {
                 >
                     <Input />
                 </Form.Item>
+
                 <Form.Item label="封面"
                     name="cover"
+                    initialValue={"http://localhost:9000/family/cover1.png"}
                     rules={[{ required: true, message: "Please input your username!" }]}>
-
-                    <Upload listType="picture-card"
-                        showUploadList={false}
-                        action="/api/upload"
-                        onChange={handleChange}>
-                        {imageUrl ? <img src={imageUrl} alt="avatar" style={{ width: '100%' }} /> : <div>
-                            {loading ? <LoadingOutlined /> : <PlusOutlined />}
-                            <div style={{ marginTop: 8 }}>Upload</div>
-                        </div>}
-                    </Upload>
-
+                    <Radio.Group>
+                        <Radio value={"http://localhost:9000/family/cover1.png"}>
+                            <img className={styles.cover} src="http://localhost:9000/family/cover1.png" alt="cover1" />
+                        </Radio>
+                        <Radio value={2}>
+                            <img className={styles.cover} src="http://localhost:9000/family/cover1.png" alt="cover1" />
+                        </Radio>
+                        <Radio value={3}>
+                            <img className={styles.cover} src="http://localhost:9000/family/cover1.png" alt="cover1" />
+                        </Radio>
+                        <Radio value={4}>
+                            <img className={styles.cover} src="http://localhost:9000/family/cover1.png" alt="cover1" />
+                        </Radio>
+                    </Radio.Group>
                 </Form.Item>
+
+                <Form.Item label="备注"
+                    name="note"
+                    rules={[{ required: true, message: "Please input note!" }]}
+                >
+                    <Input.TextArea />
+                </Form.Item>
+
                 <Form.Item>
-                    <Button type="primary" htmlType="submit">Submit</Button>
+                    <Button type="primary" htmlType="submit">保存</Button>
                 </Form.Item>
             </Form>
         </Card>

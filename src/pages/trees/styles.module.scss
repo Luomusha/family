@@ -4,6 +4,22 @@
 }
 
 .Form {
-    max-width: 400px;
+    max-width: 600px;
     margin: auto;
+
+    .cover {
+        height: 100px;
+    }
+}
+
+.List {
+    .card {
+        background-color: #fafafa;
+        border-radius: 8px;
+    }
+
+    img {
+        padding: 10px;
+    }
+
 }

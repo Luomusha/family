@@ -6,6 +6,7 @@ import { useFetch } from "../../common/useFetch";
 import { Tree } from "../../types";
 import Link from "next/link";
 import styles from "./styles.module.scss"
+import router from "next/router";
 
 const TreePage: NextPage = () => {
     const [data, setData] = useState<Tree[]>([])
@@ -22,7 +23,7 @@ const TreePage: NextPage = () => {
                 <Button key="1" type="primary"><Link href={"/trees/new"}>新增家谱</Link></Button>,
             ]} />
         <Card className={styles.Content}>
-            <List
+            <List className={styles.List}
                 grid={{
                     gutter: 16,
                     xs: 1,
@@ -33,15 +34,17 @@ const TreePage: NextPage = () => {
                     xxl: 3,
                 }}
                 dataSource={data}
-                renderItem={item => (
-                    <List.Item>
-                        <Card title={item.name}><img src="" alt="" /></Card>
-                    </List.Item>
-                )}
+                renderItem={item => <List.Item>
+                    <Card cover={<img src={item.cover} alt="cover" />}
+                        onClick={() => router.push(`trees/${item.id}`)}
+                        className={styles.card}>
+                        <Card.Meta title={item.name} />
+                    </Card>
+                </List.Item>}
             />
         </Card>
 
-    </SystemLayout>
+    </SystemLayout >
 }
 
 export default TreePage

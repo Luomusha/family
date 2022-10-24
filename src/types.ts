@@ -12,4 +12,6 @@ export interface Tree {
     name: string
     cover: string
     note: string
+    readonly createdAt?: Date
+    readonly updatedAt?: Date
 }

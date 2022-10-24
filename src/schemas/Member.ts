@@ -22,7 +22,6 @@ Member.init({
     },
     tid: {
         type: DataTypes.INTEGER,
-        autoIncrement: true,
         primaryKey: true
     },
     name: {

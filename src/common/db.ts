@@ -19,7 +19,7 @@ const mysql = new Sequelize({
 
 logger.info("db authenticate...")
 mysql.authenticate()
-    .then(() => sequelize.sync({ force: true }))
+    .then(() => sequelize.sync({ force: false }))
     .then(() => logger.info('db sync...'))
     .catch(e => logger.error(`db error: ${e.message}`));
 const sequelize = mysql
