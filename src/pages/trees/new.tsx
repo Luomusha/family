@@ -1,7 +1,6 @@
 import { Button, Card, DatePicker, Form, Input, PageHeader, Radio, Upload, UploadFile, UploadProps } from "antd";
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import { NextPage } from "next";
-import Link from "next/link";
 import router from "next/router";
 import { useFetch } from "../../common/useFetch";
 import { SystemLayout } from "../../components/SystemLayout";
@@ -35,13 +34,6 @@ const TreeForm: NextPage = () => {
         }
     };
 
-    const uploadButton = (
-        <div>
-            {loading ? <LoadingOutlined /> : <PlusOutlined />}
-            <div style={{ marginTop: 8 }}>Upload</div>
-        </div>
-    );
-
     const onFinish = (data: Tree) => {
         fetchPost(data).then(console.log)
     }
@@ -60,18 +52,17 @@ const TreeForm: NextPage = () => {
                     <Input />
                 </Form.Item>
                 <Form.Item label="封面"
-                    name="avatar"
+                    name="cover"
                     rules={[{ required: true, message: "Please input your username!" }]}>
 
-                    <Upload
-                        name="avatar"
-                        listType="picture-card"
-                        className="avatar-uploader"
+                    <Upload listType="picture-card"
                         showUploadList={false}
-                        action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                        onChange={handleChange}
-                    >
-                        {imageUrl ? <img src={imageUrl} alt="avatar" style={{ width: '100%' }} /> : uploadButton}
+                        action="/api/upload"
+                        onChange={handleChange}>
+                        {imageUrl ? <img src={imageUrl} alt="avatar" style={{ width: '100%' }} /> : <div>
+                            {loading ? <LoadingOutlined /> : <PlusOutlined />}
+                            <div style={{ marginTop: 8 }}>Upload</div>
+                        </div>}
                     </Upload>
 
                 </Form.Item>

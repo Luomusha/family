@@ -1,9 +1,10 @@
-import Minio from "minio"
+import { Client } from "minio"
+import { MINIO_KEY, MINIO_SECRET } from "./config";
 
-export const minio = new Minio.Client({
+export const minio = new Client({
     endPoint: 'localhost',
     port: 9000,
     useSSL: false,
-    accessKey: 'Q3AM3UQ867SPQQA43P2F',
-    secretKey: 'zuf+tfteSlswRu7BJ86wekitnifILbZam1KYY3TG'
+    accessKey: MINIO_KEY,
+    secretKey: MINIO_SECRET
 });

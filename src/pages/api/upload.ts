@@ -2,9 +2,17 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { minio } from "../../common/minio"
 
 const getUpload = async (req: NextApiRequest, res: NextApiResponse) => {
-    minio.
+    const buckets = await minio.listBuckets()
+    const image = await minio.getObject("family", "remote-team.png")
+    console.log(image)
+
+    res.send(image)
 }
 const postUpload = async (req: NextApiRequest, res: NextApiResponse) => {
+    const blob = req.body
+    const result = await minio.putObject("family", "hi.png", blob)
+    console.log(result);
+    res.json(result)
 }
 
 
