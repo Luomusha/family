@@ -1,6 +1,10 @@
 .Content {
     background-color: white;
     margin: 0 24px;
+
+    &+& {
+        margin-top: 24px;
+    }
 }
 
 .Form {

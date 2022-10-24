@@ -24,7 +24,7 @@ export const SystemLayout = (props: PropsWithChildren<{}>) => {
             <Sider>
                 <SystemMenu />
             </Sider>
-            <Content>{props.children}</Content>
+            <Content className={styles.Scroll}>{props.children}</Content>
         </Layout>
         <Footer>Footer</Footer>
     </Layout>
