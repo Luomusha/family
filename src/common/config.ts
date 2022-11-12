@@ -1,5 +1,5 @@
 export const MYSQL_USERNAME = process.env.MYSQL_USERNAME || "root";
-export const MYSQL_PASSWORD = process.env.MYSQL_PASSWORD || "family";
+export const MYSQL_PASSWORD = process.env.MYSQL_PASSWORD || "root";
 export const MYSQL_DATABASE = process.env.MYSQL_DATABASE || "family";
 export const MYSQL_PORT = Number(process.env.MYSQL_PORT) || 3306;
 export const MYSQL_HOST = process.env.MYSQL_HOST || "127.0.0.1";

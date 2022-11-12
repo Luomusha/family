@@ -3,7 +3,8 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { Member } from "../../../schemas/Member";
 
 const getMembers = async (req: NextApiRequest, res: NextApiResponse) => {
-    const members = await Member.findAll()
+    const { tid } = req.query
+    const members = await Member.findAll({ where: { tid } })
     res.json(members)
 }
 

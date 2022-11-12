@@ -4,9 +4,9 @@ import { Button, Card, Form, Input, List, message, Modal, PageHeader, Radio, Tab
 import { useEffect, useState } from "react";
 import { useFetch } from "../../common/useFetch";
 import { Tree } from "../../types";
-import Link from "next/link";
 import styles from "./styles.module.scss"
 import router from "next/router";
+import { FamilyForm } from "../../components/FamilyForm";
 
 const TreePage: NextPage = () => {
     const [data, setData] = useState<Tree[]>([])
@@ -27,7 +27,9 @@ const TreePage: NextPage = () => {
             .then(() => {
                 message.success("保存成功")
                 setOpen(false)
+                return fetchGet<Tree[]>()
             })
+            .then(setData)
             .catch(e => message.error(e.message))
     }
 
@@ -60,37 +62,7 @@ const TreePage: NextPage = () => {
             onCancel={() => setOpen(false)}
             confirmLoading={loading}
         >
-            <Form form={form}
-                className={styles.Form}
-                layout="vertical" >
-                <Form.Item label="名称" name="name" rules={[{ required: true, message: "Please input your username!" }]}>
-                    <Input placeholder="祝氏家谱" />
-                </Form.Item>
-
-                <Form.Item label="封面"
-                    name="cover"
-                    initialValue={"http://localhost:9000/family/cover1.png"}
-                    rules={[{ required: true, message: "Please input your username!" }]}>
-                    <Radio.Group>
-                        <Radio value={"http://localhost:9000/family/cover1.png"}>
-                            <img className={styles.cover} src="http://localhost:9000/family/cover1.png" alt="cover1" />
-                        </Radio>
-                        <Radio value={2}>
-                            <img className={styles.cover} src="http://localhost:9000/family/cover1.png" alt="cover1" />
-                        </Radio>
-                        <Radio value={3}>
-                            <img className={styles.cover} src="http://localhost:9000/family/cover1.png" alt="cover1" />
-                        </Radio>
-                        <Radio value={4}>
-                            <img className={styles.cover} src="http://localhost:9000/family/cover1.png" alt="cover1" />
-                        </Radio>
-                    </Radio.Group>
-                </Form.Item>
-
-                <Form.Item label="备注" name="note" rules={[{ required: true, message: "Please input note!" }]}>
-                    <Input.TextArea placeholder="祝氏先祖山东闯关东来到黑龙江地带" />
-                </Form.Item>
-            </Form>
+            <FamilyForm form={form} />
         </Modal>
     </SystemLayout >
 }
