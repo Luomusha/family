@@ -9,9 +9,9 @@ const getTrees = async (req: NextApiRequest, res: NextApiResponse) => {
 
 const postTrees = async (req: NextApiRequest, res: NextApiResponse) => {
     const { name, cover, note } = req.body
-    assert(name, 400)
-    assert(cover, 400)
-    assert(note, 400)
+    assert(name, 400, "name is required.")
+    assert(cover, 400, "cover is required.")
+    assert(note, 400, "note is required.")
     const db = await Tree.create({ name, cover, note })
     res.json(db)
 }

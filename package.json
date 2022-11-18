@@ -23,6 +23,7 @@
     "winston": "^3.8.2"
   },
   "devDependencies": {
+    "@faker-js/faker": "^7.6.0",
     "@types/formidable": "^2.0.5",
     "@types/http-assert": "^1.5.3",
     "@types/minio": "^7.0.14",
